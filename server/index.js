@@ -77,7 +77,7 @@ router.get('/success', async ctx => {
 		{ 
 			grant_code: ctx.request.query.grant_code,
 			state: ctx.request.query.state,
-			user_id: ctx.request.query.user_id
+			uid: ctx.request.query.user_id
 		}).catch(err => {
 			console.log(err);
 		});
