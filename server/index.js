@@ -108,5 +108,5 @@ app.use(async (ctx) => {
 
 
 models.db.sync().then(() => {
-  app.listen(process.env.PORT || 3000);
+  app.listen(process.env.PORT || 4000);
 });
