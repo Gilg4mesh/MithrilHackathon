@@ -48,7 +48,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/api2/get_friends', 
+		    axios.post('/res/get_friends', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.friends = result.data.friends;
@@ -64,7 +64,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/api2/add_friend', 
+		    axios.post('/res/add_friend', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name'), new_friend: this.new_friend }, config)
 				.then(result => {
 					if (result.data.ok) {

@@ -36,7 +36,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/api2/get_vault', 
+		    axios.post('/res/get_vault', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.binded_mith = result.data.ok;
@@ -55,7 +55,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/api2/get_user', 
+		    axios.post('/res/get_user', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.current_address = result.data.user.current_address;
@@ -70,7 +70,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/api2/set_wallet', 
+		    axios.post('/res/set_wallet', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name'), address: this.new_address }, config)
 				.then(result => {
 					this.current_address = result.data.address;

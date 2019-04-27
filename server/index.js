@@ -60,7 +60,7 @@ router.post('/register', async ctx => {
 	    }
 });
 
-router.post('/api2/auth', async ctx => {
+router.post('/res/auth', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -95,7 +95,7 @@ router.get('/success', async ctx => {
 
 });
 
-router.post('/api2/get_user', async ctx => {
+router.post('/res/get_user', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -109,7 +109,7 @@ router.post('/api2/get_user', async ctx => {
     }
 });
 
-router.post('/api2/set_wallet', async ctx => {
+router.post('/res/set_wallet', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -128,7 +128,7 @@ router.post('/api2/set_wallet', async ctx => {
 	    }
 });
 
-router.post('/api2/get_vault', async ctx => {
+router.post('/res/get_vault', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -142,7 +142,7 @@ router.post('/api2/get_vault', async ctx => {
     }
 });
 
-router.post('/api2/get_reward', async ctx => {
+router.post('/res/get_reward', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -156,7 +156,7 @@ router.post('/api2/get_reward', async ctx => {
     }
 });
 
-router.post('/api2/end_game', async ctx => {
+router.post('/res/end_game', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -169,7 +169,7 @@ router.post('/api2/end_game', async ctx => {
     }
 });
 
-router.post('/api2/withdraw_mith', async ctx => {
+router.post('/res/withdraw_mith', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -182,7 +182,7 @@ router.post('/api2/withdraw_mith', async ctx => {
     }
 });
 
-router.post('/api2/add_friend', async ctx => {
+router.post('/res/add_friend', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -195,7 +195,7 @@ router.post('/api2/add_friend', async ctx => {
     }
 });
 
-router.post('/api2/get_friends', async ctx => {
+router.post('/res/get_friends', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -209,7 +209,7 @@ router.post('/api2/get_friends', async ctx => {
     }
 });
 
-router.post('/api2/first_win_exist', async ctx => {
+router.post('/res/first_win_exist', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
