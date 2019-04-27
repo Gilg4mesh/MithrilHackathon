@@ -14,26 +14,26 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         unique: true,
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       },
       password: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       },
       uuid: {
         unique: true,
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       },
       grant_code: {
         unique: true,
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       },
       state: {
         unique: true,
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       }
   }, {})
   Users.associate = function(models) {

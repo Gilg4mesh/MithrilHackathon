@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         allowNull: false,
         [Op.regexp]: '^0x[a-fA-F0-9]{40}$',
-        type: DataTypes.STRING
+        type: DataTypes.STRING(120)
       },
       user_id: {
         allowNull: false,
