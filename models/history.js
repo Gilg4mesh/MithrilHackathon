@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op;
 
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('users', {
+  const History = sequelize.define('history', {
       id: {
         unique: true,
         allowNull: false,
@@ -11,40 +11,31 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      name: {
-        unique: true,
+      game_addr: {
         allowNull: false,
+        [Op.regexp]: '^0x[a-fA-F0-9]{40}$',
         type: DataTypes.STRING(120)
       },
-      password: {
+      user_addr: {
         allowNull: false,
+        [Op.regexp]: '^0x[a-fA-F0-9]{40}$',
         type: DataTypes.STRING(120)
       },
-      uuid: {
-        unique: true,
+      user_id: {
         allowNull: false,
-        type: DataTypes.STRING(120)
+        type: DataTypes.INTEGER
       },
-      grant_code: {
-        unique: true,
-        type: DataTypes.STRING(120)
-      },
-      state: {
-        unique: true,
-        type: DataTypes.STRING(120)
-      },
-      interest: {
+      reward: {
         defaultValue: 0,
         type: DataTypes.DOUBLE
       },
-      current_address: {
-        unique: true,
-        [Op.regexp]: '^0x[a-fA-F0-9]{40}$',
-        type: DataTypes.STRING(120)
+      done: {
+        defaultValue: 0,
+        type: DataTypes.BOOLEAN
       }
   }, {})
-  Users.associate = function(models) {
+  History.associate = function(models) {
     // associations can be defined here
   };
-  return Users;
+  return History;
 };

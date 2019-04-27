@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "bignumber.js": "^8.1.1",
     "eth-sig-util": "^2.1.2",
     "ethereumjs-util": "^6.1.0",
     "jwa": "^1.4.1",

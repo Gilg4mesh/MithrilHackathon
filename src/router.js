@@ -7,6 +7,10 @@ import PageNotFoundPage from './pages/PageNotFoundPage.vue';
 
 const Index = () =>
   import('./pages/Index.vue');
+const Config = () =>
+  import('./pages/Config.vue');
+const Friends = () =>
+  import('./pages/Friends.vue');
 const Register = () =>
   import('./pages/Register.vue');
 const Login = () =>
@@ -21,6 +25,14 @@ export default new Router({
   {
     path: '/',
     component: Index,
+  },
+  {
+    path: '/config',
+    component: Config,
+  },
+  {
+    path: '/friends',
+    component: Friends,
   },
   {
     path: '/register',

@@ -14,6 +14,7 @@ const app = new Koa();
 const router = new Router();
 const readFile = util.promisify(fs.readFile);
 const auth = require('./auth');
+const userInfo = require('./userInfo');
 const jwa = require('jwa');
 const privateKey = fs.readFileSync(__dirname + '/../rs256-4096-private.rsa');
 const publicKey = fs.readFileSync(__dirname + '/../rs256-4096-public.pem');
@@ -59,7 +60,7 @@ router.post('/register', async ctx => {
 	    }
 });
 
-router.post('/api/auth', async ctx => {
+router.post('/api2/auth', async ctx => {
 	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
 	    ctx.body = { ok: false, msg: 'Authorization Failed' }
 	    return;
@@ -72,7 +73,6 @@ router.post('/api/auth', async ctx => {
 });
 
 router.get('/success', async ctx => {
-	
     let res = await axios.post('https://mith.ramiel.io/api/success', 
 		{ 
 			grant_code: ctx.request.query.grant_code,
@@ -94,6 +94,147 @@ router.get('/success', async ctx => {
 	    }
 
 });
+
+router.post('/api2/get_user', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let user = await models.Users.findOne({ where: { name: ctx.request.header.user_name } });
+
+    ctx.body = {
+        ok: true,
+        user: user
+    }
+});
+
+router.post('/api2/set_wallet', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let new_wallet = await userInfo.setWallet(ctx.request.header.user_name, ctx.request.body.address);
+
+	if (new_wallet)
+	    ctx.body = {
+	        ok: true,
+	        address: new_wallet
+	    }
+	else
+	    ctx.body = {
+	        ok: false
+	    }
+});
+
+router.post('/api2/get_vault', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let vault = await userInfo.getVault(ctx.request.header.user_name);
+
+    ctx.body = {
+        ok: true,
+        vault: vault
+    }
+});
+
+router.post('/api2/get_reward', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let reward = await userInfo.getReward(ctx.request.header.user_name);
+
+    ctx.body = {
+        ok: true,
+        reward: reward
+    }
+});
+
+router.post('/api2/end_game', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let res = await userInfo.endGame(ctx.request.header.user_name, ctx.request.body.game_address);
+
+    ctx.body = {
+        ok: res
+    }
+});
+
+router.post('/api2/withdraw_mith', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let res = await userInfo.withdrawMith(ctx.request.header.user_name);
+
+    ctx.body = {
+        ok: res
+    }
+});
+
+router.post('/api2/add_friend', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let res = await userInfo.addFriend(ctx.request.header.user_name, ctx.request.body.new_friend);
+
+    ctx.body = {
+        ok: res
+    }
+});
+
+router.post('/api2/get_friends', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let res = await userInfo.getFriends(ctx.request.header.user_name);
+
+    ctx.body = {
+        ok: true,
+        friends: res
+    }
+});
+
+router.post('/api2/first_win_exist', async ctx => {
+	if (!ecdsa.verify(ctx.request.header.user_name, ctx.request.header.signature, publicKey)) {
+	    ctx.body = { ok: false, msg: 'Authorization Failed' }
+	    return;
+	}
+
+	let first_win_exist = await userInfo.firstWinExist(ctx.request.header.user_name);
+
+    ctx.body = {
+        ok: true,
+        first_win_exist: first_win_exist
+    }
+});
+
+
+
+
+// for demo
+router.get('/admin/end_cycle', async ctx => {
+	await userInfo.endCycle();
+
+    ctx.body = {
+        ok: true
+    }
+});
+
 
 
 
