@@ -27,12 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       grant_code: {
         unique: true,
-        allowNull: false,
         type: DataTypes.STRING(120)
       },
       state: {
         unique: true,
-        allowNull: false,
         type: DataTypes.STRING(120)
       }
   }, {})
