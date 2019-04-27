@@ -91,7 +91,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_vault', 
+		    axios.post('/api2/get_vault', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.binded_mith = result.data.ok;
@@ -107,7 +107,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_reward', 
+		    axios.post('/api2/get_reward', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.reward = result.data.reward;
@@ -122,7 +122,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_user', 
+		    axios.post('/api2/get_user', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.current_address = result.data.user.current_address;
@@ -138,7 +138,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/first_win_exist', 
+		    axios.post('/api2/first_win_exist', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.win = result.data.first_win_exist;
@@ -153,7 +153,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/end_game', 
+		    axios.post('/api2/end_game', 
 				{ game_address: this.game_address }, config)
 				.then(result => {
 					if (result.data.ok) {
@@ -175,7 +175,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/withdraw_mith', 
+		    axios.post('/api2/withdraw_mith', 
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					if (result.data.ok) {
