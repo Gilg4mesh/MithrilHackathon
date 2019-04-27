@@ -83,7 +83,7 @@ router.get('/success', async ctx => {
 		});
 
 
-	if (res.result)
+	if (res.result == true)
 	    ctx.body = {
 	        ok: true
 	    }
