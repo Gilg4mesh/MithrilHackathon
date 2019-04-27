@@ -4,7 +4,7 @@ const uuidv4 = require('uuid/v4')
 const jwa = require('jwa');
 const fs = require('fs');
 const privateKey = fs.readFileSync(__dirname + '/../rs256-4096-private.rsa');
-const publicKey = fs.readFileSync(__dirname + '/../rs256-4096-public.pem');
+const secret = "mith";
 const ecdsa = jwa('RS256');
 
 
