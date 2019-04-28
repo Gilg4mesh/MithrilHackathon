@@ -34,7 +34,7 @@
 		<h1>Daily 1st win: {{ win ? "exist" : "done" }}</h1>
 		<br>
 		<div class="row">
-			<label class="col-2">Game Address: </label>
+			<h3 class="col-2">Game Address: </h3>
 			<input class="col-5 form-control" type="text" v-model="game_address">
 			<div class="col-1"></div>
 			<button type="button" class="btn btn-primary col-4 form-control" @click="endGame()">End Game</button>
