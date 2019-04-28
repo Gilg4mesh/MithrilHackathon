@@ -19,19 +19,19 @@
 			</div>
 			<div class="card col-3">
 			  <div class="card-body">
-			    <h4 class="card-title">Estimate Interest</h4>
-			    <h2 class="card-text">{{ Math.floor(amount) / 100 }}</h2>
+			    <h4 class="card-title">Estimated Interest</h4>
+			    <h2 class="card-text">{{ (amount / 100).toFixed(6) }}</h2>
 			  </div>
 			</div>
 			<div class="card col-3">
 			  <div class="card-body">
 			    <h4 class="card-title">Health</h4>
-			    <h2 class="card-text">{{ amount * 0.01 == 0 ? 100 : reward/(amount * 0.01) * 100 >= 100 ? 100 : Math.floor(reward/(amount * 0.01) * 100)}}%</h2>
+			    <h2 class="card-text">{{ healthPercent }}%</h2>
 			  </div>
 			</div>
 		</div>
 		<br>
-		<h1>Daily 1st win: {{ win ? "open for claiming" : "already taken :(" }}</h1>
+		<h1>Daily 1st win: {{ win ? "open for claiming" : "already taken :c" }}</h1>
 		<br>
 		<div class="row">
 			<h3 class="col-2">Game Address: </h3>
@@ -80,6 +80,18 @@ export default {
     	win: false,
     	game_address: null,
      	txs: []
+    }
+  },
+  computed: {
+    healthPercent() {
+      const {reward, amount} = this
+      if (amount * 0.01 == 0) {
+        return 100
+      }
+      if (reward/(amount * 0.01) * 100 >= 100) {
+        return 100
+      }
+      return Math.floor(reward/(amount * 0.01) * 100)
     }
   },
   methods: {
