@@ -84,9 +84,7 @@ router.get('/success', async ctx => {
 
 
 	if (res.data.result)
-	    ctx.body = {
-	        ok: true
-	    }
+	    ctx.redirect('/');
 	else
 	    ctx.body = {
 	        ok: false,
