@@ -30,7 +30,7 @@ export default {
   	getVault() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -49,7 +49,7 @@ export default {
   	getAddress() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -64,7 +64,7 @@ export default {
   	setWallet() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};

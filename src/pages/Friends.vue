@@ -42,7 +42,7 @@ export default {
   	getFriends() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -58,7 +58,7 @@ export default {
   	addFriend() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};

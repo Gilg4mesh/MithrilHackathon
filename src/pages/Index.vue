@@ -85,7 +85,7 @@ export default {
   	getVault() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -101,7 +101,7 @@ export default {
   	getReward() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -116,7 +116,7 @@ export default {
   	getInterest() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -132,7 +132,7 @@ export default {
   	firstWinExist() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -147,7 +147,7 @@ export default {
   	endGame() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
@@ -169,7 +169,7 @@ export default {
   	withdrawMith() {
   		let config = {
 		  headers: {
-		  	'user_name': localStorage.getItem('mith_ramiel_user_name'),
+		  	'info': localStorage.getItem('mith_ramiel_user_name'),
 		  	'signature': localStorage.getItem('mith_ramiel_token')
 		   }
 		};
