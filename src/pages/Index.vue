@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" v-show="loaded">
 		<br>
 		<h1>Current Address: {{ current_address }}</h1>
 		<br>
@@ -31,13 +31,13 @@
 			</div>
 		</div>
 		<br>
-		<h1>Daily 1st win: {{ win ? "exist" : "done" }}</h1>
+		<h1>Daily 1st win: {{ win ? "open for claiming" : "already taken :(" }}</h1>
 		<br>
 		<div class="row">
 			<h3 class="col-2">Game Address: </h3>
 			<input class="col-5 form-control" type="text" v-model="game_address">
 			<div class="col-1"></div>
-			<button type="button" class="btn btn-primary col-4 form-control" @click="endGame()">End Game</button>
+			<button type="button" class="btn btn-primary col-4 form-control" @click="endGame()">Redeem award</button>
 		</div>
 		<br>
 		<br>
@@ -58,7 +58,7 @@
 		      <td>{{ tx.status }}</td>
 		      <td>{{ tx.date }}</td>
 		    </tr>
-		    
+
 		  </tbody>
 		</table>
 	</div>
@@ -72,6 +72,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      loaded: false,
     	binded_mith: false,
     	current_address: null,
     	amount: 0,
@@ -91,7 +92,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_vault', 
+		    axios.post('/res/get_vault',
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.binded_mith = result.data.ok;
@@ -107,7 +108,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_reward', 
+		    axios.post('/res/get_reward',
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.reward = result.data.reward;
@@ -122,7 +123,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/get_user', 
+		    axios.post('/res/get_user',
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.current_address = result.data.user.current_address;
@@ -138,11 +139,11 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/first_win_exist', 
+		    axios.post('/res/first_win_exist',
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					this.win = result.data.first_win_exist;
-				})		
+				})
   	},
   	endGame() {
   		let config = {
@@ -153,7 +154,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/end_game', 
+		    axios.post('/res/end_game',
 				{ game_address: this.game_address }, config)
 				.then(result => {
 					if (result.data.ok) {
@@ -163,7 +164,7 @@ export default {
 						alert("Success!");
 					}
 					else
-						alert("Nope!");
+						alert("This is not a valid game address.");
 				})
   	},
   	withdrawMith() {
@@ -175,7 +176,7 @@ export default {
 		};
 
 		if (localStorage.getItem('mith_ramiel_user_name'))
-		    axios.post('/res/withdraw_mith', 
+		    axios.post('/res/withdraw_mith',
 				{ user_name: localStorage.getItem('mith_ramiel_user_name') }, config)
 				.then(result => {
 					if (result.data.ok) {
@@ -186,12 +187,15 @@ export default {
   	}
   },
   mounted() {
+  	if (localStorage.getItem('mith_ramiel_token') == null) {
+  		window.location.href = '/login';
+    } else {
+      this.loaded = true;
+    }
   	this.getReward();
   	this.getVault();
   	this.getInterest();
   	this.firstWinExist();
-  	if (localStorage.getItem('mith_ramiel_token') == null)
-  		window.location.href = '/login';
   }
 };
 </script>
