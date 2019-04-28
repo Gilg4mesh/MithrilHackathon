@@ -1,5 +1,6 @@
 const axios = require('axios');
 const models = require('../models');
+const dexon = require('./dexon-check-game-valid');
 const Sequelize = require('sequelize')
 const BigNumber = require('bignumber.js');
 const Op = Sequelize.Op;
@@ -26,18 +27,40 @@ async function setWallet(user_name, new_address) {
 }
 
 async function checkGame(game_address, user_address) {
-    return true;
+    return await dexon.checkGameParticipant(game_address, user_address)
+    .then(success => {
+      if (success) {
+        console.log('Yes!')
+        return true;
+      }
+    })
+    .catch(error => {
+        console.log('No.', error.message)
+        return false;
+    })
 }
 
 async function endGame(user_name, game_address) {
     let user = await models.Users.findOne({ where: { name: user_name } });
     let game_address_used = await models.History.findOne({ where: { user_id: user.id, game_addr: game_address } });
-    if (game_address_used != null || !checkGame(game_address, user.current_address))
+    if (game_address_used != null || !await checkGame(game_address, user.current_address))
     	return false;
 
     let has_first_win = await models.History.findOne({ where: { user_id: user.id, done: false } });
     let reward = has_first_win == null ? 2 : 1;
-    // if (with_friend) reward = reward * 1.2;
+
+
+    let friend_id_list = await models.Friends.findAll({ where: { user_id: user.id }, attributes: ['friend_id'] })
+    .then(friends => friends.map(friend => friend.friend_id));
+    let friend_list = await models.Users.findAll({ where: { id: { [Op.in]: friend_id_list } } });
+    let is_with_friend = false;
+
+    for (var index in friend_list) {
+      if (await checkGame(game_address, friend_list[index].current_address))
+        is_with_friend = true;
+    }
+    
+    if (is_with_friend) reward = reward * 1.2;
 
     let success = await models.History.create({
     	game_addr: game_address,

@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<br>
-		<h1>First Winning Today: {{ win }}</h1>
+		<h1>Daily 1st win: {{ win ? "exist" : "done" }}</h1>
 		<br>
 		<div class="row">
 			<label class="col-2">Game Address: </label>
