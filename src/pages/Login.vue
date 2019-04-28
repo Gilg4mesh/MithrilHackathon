@@ -5,7 +5,7 @@
 			<label>user name</label>
 			<input type="text" class="form-control" v-model="user_name">
 			<label>password</label>
-			<input type="text" class="form-control" v-model="password">
+			<input type="password" class="form-control" v-model="password">
 			<br>
 	    	<button type="button" class="btn btn-primary form-control" @click="login(user_name, password)">Submit</button>
 	    </div>
